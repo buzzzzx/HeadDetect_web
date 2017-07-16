@@ -1,0 +1,2 @@
+
+[{"time":"10:00:00","people_count":"5"},{"time":"10:30:00","people_count":"7"},{"time":"11:00:00","people_count":"6"},{"time":"11:30:00","people_count":"11"},{"time":"12:00:00","people_count":"8"},{"time":"12:30:00","people_count":"3"},{"time":"13:00:00","people_count":"7"}]
