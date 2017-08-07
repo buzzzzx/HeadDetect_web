@@ -16,13 +16,14 @@
 
 <body>
 <!--百度地图容器-->
-<div style="width:697px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
+<div style="width:100%;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
 </body>
 <script type="text/javascript">
 
     var xhr;
-    var count_b;
+    var accumulate;
     var current_time;
+    var condition;
 
     function getValue() {
         xhr = new XMLHttpRequest();
@@ -35,13 +36,25 @@
                 var result = xhr.responseText;
                 var j = eval(result);
                 for(var key in j) {
-                    count_b = j[key].people_count;
+                    accumulate = parseInt(j[key].accumulate);
+                    if (accumulate <= 50){
+                        condition = '人数较少'
+                    }
+                    else if (50 < accumulate <= 150) {
+                        condition = '人数较多'
+                    }
+                    else if (150 < accumulate <= 250) {
+                        condition = '人数多'
+                    }
+                    else {
+                        condition = '人很多'
+                    }
                     current_time = j[key].time;
                 }
             }
         };
         xhr.send(null);
-        return "估计："+count_b+"人" + "<br/>" + "时间：" + current_time;
+        return "估计：" + condition + "(" + accumulate + "人" + ")" + "<br/>" + "时间：" + current_time;
 
     }
     
@@ -83,11 +96,11 @@
     }
 
     //标注点数组
-    var markerArr = [{title:"当前人数",content:getValue(),point:"104.190872|30.830866",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-        ,{title:"当前人数",content:"54人",point:"104.191231|30.832215",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-        ,{title:"当前人数",content:"134人",point:"104.192624|30.83161",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-        ,{title:"当前人数",content:"67人",point:"104.19151|30.82992",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-        ,{title:"当前人数",content:"17人",point:"104.192426|30.830114",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+    var markerArr = [{title:"当前人数情况",content:getValue()+"<br/>地点：篮球场",point:"104.190872|30.830866",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        ,{title:"当前人数情况",content:"54人"+"<br/>地点：一期体育场",point:"104.191231|30.832215",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        ,{title:"当前人数情况",content:"134人"+"<br/>地点：一食堂",point:"104.192624|30.83161",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        ,{title:"当前人数情况",content:"67人"+"<br/>地点：体育馆",point:"104.19151|30.82992",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        ,{title:"当前人数情况",content:"17人"+"<br/>地点：百世快递",point:"104.192426|30.830114",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
     ];
     //创建marker
     function addMarker(){

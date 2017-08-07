@@ -26,6 +26,7 @@
             type:'get',
             url:'test.php', //请求数据的地址
             dataType:'json', //后台传值指定格式
+            async: false,
             error:function(){
                 alert("请求失败！！！");
             },
@@ -83,6 +84,15 @@
     });
 </script>
 <div id="container" style="margin: 0 auto" >
+</div>
+<div style="position: relative; height: 30px; margin: 20px">
+    <img src="img/Tips_32px_1194699_easyicon.net.png" style="margin-left: 20px">
+    <div style="position:absolute; top:5px; left: 50px;">
+        Tips
+    </div>
+    <p style="margin-top: 5px">
+        &emsp;&emsp;&emsp;&emsp;根据我们调查，在三个时间间隔内人数连续在7人左右，该出入口人流量较大，进而该时段食堂人数较多。
+    </p>
 </div>
 </body>
 </html>

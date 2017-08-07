@@ -8,7 +8,7 @@
 
 class display_result {
 	public $time;
-	public $people_count;
+	public $average_num;
 }	
 
 //$q = isset($_GET["q"]) ? intval($_GET["q"]) : '';
@@ -22,7 +22,7 @@ if (!$conn) {
 mysqli_select_db($conn, "head");
 mysqli_set_charset($conn, "utf8");
 
-$sql = "SELECT time,people_count FROM head_count";
+$sql = "SELECT time,average_num FROM canteen_one_a order by id desc limit 15";
 
 $data = array();
 $i = 0;
@@ -33,7 +33,7 @@ if ($result) {
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		$dr = new display_result();
 		$dr->time = $row["time"];
-		$dr->people_count = $row["people_count"];
+		$dr->average_num = $row["average_num"];
 		$data[$i] = $dr;
 		$i++;
 	}
