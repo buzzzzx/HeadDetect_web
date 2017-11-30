@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -96,7 +97,7 @@
     }
 
     //标注点数组
-    var markerArr = [{title:"当前人数情况",content:getValue()+"<br/>地点：篮球场",point:"104.190872|30.830866",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+    var markerArr = [{title:"当前人数情况",content:"78人"+"<br/>地点：篮球场",point:"104.190872|30.830866",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ,{title:"当前人数情况",content:"54人"+"<br/>地点：一期体育场",point:"104.191231|30.832215",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ,{title:"当前人数情况",content:"134人"+"<br/>地点：一食堂",point:"104.192624|30.83161",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ,{title:"当前人数情况",content:"67人"+"<br/>地点：体育馆",point:"104.19151|30.82992",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
@@ -152,7 +153,7 @@
     }
     //创建一个Icon
     function createIcon(json){
-        var icon = new BMap.Icon("img/mk_icon_r.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        var icon = new BMap.Icon("{% static 'img/mk_icon_r.png' %}", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
         return icon;
     }
 

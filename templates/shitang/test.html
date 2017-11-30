@@ -1,0 +1,93 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>一食堂A出入口</title>
+    <!--easyUI插件导入-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/easyui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icon.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.easyui.min.js' %}"></script>
+    <!--highcharts插件导入-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{% static 'js/jquery-1.8.3.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/highcharts-zh_CN.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/highcharts-3d.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/exporting.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/highcharts.js' %}" type="text/javascript"></script>
+
+</head>
+<body>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        var xtext = [];
+        var ytext = [];
+        var color = ["gray", "tan", "red", "blue", "yellow", "green", "black", "purple", "skyblue"];
+        {% for data in datas %}
+            var s = {{ data.date_join.isoformat }} {{ data.time_join.isoformat}};
+            s = s.replace(/-/g,"/");
+            var date = new Date(s)
+
+            xtext.push(t);
+            ytext.push({{ data.people_count }});
+        {% endfor %}
+        a = ['11:00', '11:01', '11:02', '11:03'];
+
+        $('#container').highcharts({
+            chart: {
+                type: 'column',
+                margin: 75,
+                options3d: {
+                    enabled: true,
+                    alpha: 10,
+                    beta: 25,
+                    depth: 70
+                }
+            },
+            title: {
+                text: '一食堂A出入口人口流量信息展示'
+            },
+            subtitle: {
+                text: ''
+            },
+            plotOptions: {
+                column: {
+                    depth: 25
+                }
+            },
+            xAxis: {
+                categories: xtext
+            },
+            yAxis: {
+                title: {
+                    text: '人数'
+                }
+            },
+            series: [{
+                name: '平均人数',
+                data: ytext
+            }]
+        });
+
+    });
+</script>
+<div id="container" style="margin: 0 auto">
+</div>
+<div style="position: relative; height: 30px; margin: 20px">
+    <img src="{% static 'img/Tips_32px_1194699_easyicon.net.png' %}" style="margin-left: 20px">
+    <div style="position:absolute; top:5px; left: 50px;">
+        Tips
+    </div>
+    <p style="margin-top: 5px">
+        &emsp;&emsp;&emsp;&emsp;根据实际情况，在连续三个时间间隔内(6分钟)人数在5人左右及以上，该出入口人流量较大，进而该时段食堂人数较多。
+        {% for data in datas %}
+            | {{ data.date_join.isoformat }} {{ data.time_join.isoformat}}
+
+        {% endfor %}
+    </p>
+</div>
+</body>
+</html>
